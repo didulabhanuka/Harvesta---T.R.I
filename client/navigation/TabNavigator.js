@@ -1,10 +1,9 @@
-// /navigation/TabNavigator.js
-
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, View } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { CommonActions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +43,21 @@ export default function TabNavigator({ screens }) {
       })}
     >
       {screens.map(({ name, component }) => (
-        <Tab.Screen key={name} name={name} component={component} />
+        <Tab.Screen
+          key={name}
+          name={name}
+          component={component}
+          listeners={({ navigation, route }) => ({
+            tabPress: (e) => {
+              const state = navigation.getState();
+              const tab = state.routes.find(r => r.name === route.name);
+              
+              if (tab?.state && tab?.state?.index > 0) {
+                navigation.navigate(route.name);
+              }
+            }
+          })}
+        />
       ))}
     </Tab.Navigator>
   );

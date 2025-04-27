@@ -1,8 +1,6 @@
-// /navigation/AppNavigator.js
-
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TabNavigator from './TabNavigator';  // import updated TabNavigator
+import TabNavigator from './TabNavigator'; 
 import SplashScreen from '../components/SplashScreen';
 import WelcomeScreen from '../components/WelcomeScreen';
 
@@ -17,7 +15,7 @@ import HistoricalDataScreen from '../screens/harvest/HistoricalDataScreen';
 
 const Stack = createNativeStackNavigator();
 
-// Wrapping each screen inside Stack (optional for future extension)
+// Home Stack
 function HomeStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -26,6 +24,7 @@ function HomeStackScreen() {
   );
 }
 
+// Fertilization Stack
 function FertilizationStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -34,6 +33,7 @@ function FertilizationStackScreen() {
   );
 }
 
+// Disease Detection Stack
 function DiseaseDetectionStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -42,6 +42,7 @@ function DiseaseDetectionStackScreen() {
   );
 }
 
+// Pest Management Stack
 function PestManagementStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -50,7 +51,19 @@ function PestManagementStackScreen() {
   );
 }
 
-function HarvestStackScreen() {
+// Harvest Stack 
+function HarvestStackScreen({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      const state = navigation.getState();
+      if (state?.routes?.length > 1) {
+        navigation.popToTop();
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="HarvestMain" component={HarvestScreen} />
@@ -60,6 +73,8 @@ function HarvestStackScreen() {
   );
 }
 
+
+// App Navigator
 export default function AppNavigator() {
   const screens = [
     { name: 'Fertilization', component: FertilizationStackScreen },
@@ -73,7 +88,7 @@ export default function AppNavigator() {
     <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Home" >
+      <Stack.Screen name="Home">
         {() => <TabNavigator screens={screens} />}
       </Stack.Screen>
     </Stack.Navigator>

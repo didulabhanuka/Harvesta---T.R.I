@@ -187,7 +187,7 @@ export default function HarvestScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#fff', paddingBottom: 50},
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',

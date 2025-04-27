@@ -120,7 +120,7 @@ export default function HistoricalDataScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#fff', paddingBottom: 50 },
   loaderContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   scrollContainer: { padding: 20 },
   headerText: {

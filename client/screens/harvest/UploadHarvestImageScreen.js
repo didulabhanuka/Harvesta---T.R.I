@@ -83,18 +83,18 @@ export default function UploadHarvestImageScreen() {
 
   return (
     <View style={styles.container}>
-      
-      {/* Lottie Animation */}
-      <View style={styles.animationContainer}>
-        <LottieView
-          source={require('../../assets/jsons/harvest-upload.json')}
-          autoPlay
-          loop
-          style={{ width: 250, height: 250 }}
-        />
-      </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+
+        {/* Lottie Animation */}
+        <View style={styles.animationContainer}>
+          <LottieView
+            source={require('../../assets/jsons/harvest-upload.json')}
+            autoPlay
+            loop
+            style={{ width: 250, height: 250 }}
+          />
+        </View>
 
         {/* Instructions */}
         <View style={styles.card}>
@@ -158,7 +158,7 @@ export default function UploadHarvestImageScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#fff', paddingBottom: 50 },
   scrollContainer: { padding: 20, alignItems: 'center' },
   animationContainer: {
     marginTop: 20,
